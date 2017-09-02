@@ -48,17 +48,6 @@ inline float fast_inv_sqrt(float x) {
 
 #define roundf(x) floorf((x) + 0.5f)
 
-#ifndef min
-#define min(x, y) ((x < y)? x : y)
-#endif
-
-#ifndef max
-#define max(x, y) ((x > y)? x : y)
-#endif
-
-#define clamp(x, lo, hi) max(min(x, hi), lo)
-#define saturate(x) clamp(x, 0, 1)
-
 //#include "math/vector.hpp"
 //#include "math/matrix.hpp"
 

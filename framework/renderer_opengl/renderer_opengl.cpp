@@ -13,7 +13,6 @@
 #include "renderer_opengl.hpp"
 #include "../model/batch.hpp"
 #include "../misc/log.hpp"
-#include "gl_extensions.hpp"
 #include "../material/image.hpp"
 #include "../scene/camera.hpp"
 

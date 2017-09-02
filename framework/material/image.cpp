@@ -14,6 +14,7 @@
 #include "../misc/log.hpp"
 
 #include <fstream>
+#include <cstring>
 
 static int TGAReadError = 0;
 

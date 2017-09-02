@@ -12,6 +12,7 @@
 
 #include "base.hpp"
 #include "misc/log.hpp"
+#include <cstring>
 
 //==============================================================================
 //  Base::Base()
