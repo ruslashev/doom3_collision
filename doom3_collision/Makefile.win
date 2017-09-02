@@ -1,0 +1,74 @@
+# Project: my_project
+# Makefile created by Dev-C++ 4.9.9.0
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = 
+OBJ  = main.o ../framework/misc/log.o ../framework/math/vector.o ../framework/base_sdl/base_sdl.o ../framework/base.o ../framework/renderer_opengl/renderer_opengl.o ../framework/model/batch.o ../framework/material/texture.o ../framework/material/image.o ../framework/renderer_opengl/gl_extensions.o ../framework/renderer.o ../framework/scene/camera.o ../framework/math/matrix.o ../framework/scene/scene_portal.o ../framework/math/geometry.o ../framework/physics/collision_set_bsp.o $(RES)
+LINKOBJ  = main.o ../framework/misc/log.o ../framework/math/vector.o ../framework/base_sdl/base_sdl.o ../framework/base.o ../framework/renderer_opengl/renderer_opengl.o ../framework/model/batch.o ../framework/material/texture.o ../framework/material/image.o ../framework/renderer_opengl/gl_extensions.o ../framework/renderer.o ../framework/scene/camera.o ../framework/math/matrix.o ../framework/scene/scene_portal.o ../framework/math/geometry.o ../framework/physics/collision_set_bsp.o $(RES)
+LIBS =  -L"C:/Dev-Cpp/lib" -lmingw32  -lSDLmain  -lSDL  -mwindows -lglaux -lopengl32 -lglu32  -s -march=i686 
+INCS =  -I"C:/Dev-Cpp/include" 
+CXXINCS =  -I"C:/Dev-Cpp/include/c++"  -I"C:/Dev-Cpp/include/c++/mingw32"  -I"C:/Dev-Cpp/include/c++/backward"  -I"C:/Dev-Cpp/include" 
+BIN  = project.exe
+CXXFLAGS = $(CXXINCS) -ffast-math -fomit-frame-pointer  -pipe   -fsave-memoized -fexpensive-optimizations -O3 -march=i686
+CFLAGS = $(INCS) -ffast-math -fomit-frame-pointer  -pipe   -fsave-memoized -fexpensive-optimizations -O3 -march=i686
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before project.exe all-after
+
+
+clean: clean-custom
+	rm -f $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o "project.exe" $(LIBS)
+
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+../framework/misc/log.o: ../framework/misc/log.cpp
+	$(CPP) -c ../framework/misc/log.cpp -o ../framework/misc/log.o $(CXXFLAGS)
+
+../framework/math/vector.o: ../framework/math/vector.cpp
+	$(CPP) -c ../framework/math/vector.cpp -o ../framework/math/vector.o $(CXXFLAGS)
+
+../framework/base_sdl/base_sdl.o: ../framework/base_sdl/base_sdl.cpp
+	$(CPP) -c ../framework/base_sdl/base_sdl.cpp -o ../framework/base_sdl/base_sdl.o $(CXXFLAGS)
+
+../framework/base.o: ../framework/base.cpp
+	$(CPP) -c ../framework/base.cpp -o ../framework/base.o $(CXXFLAGS)
+
+../framework/renderer_opengl/renderer_opengl.o: ../framework/renderer_opengl/renderer_opengl.cpp
+	$(CPP) -c ../framework/renderer_opengl/renderer_opengl.cpp -o ../framework/renderer_opengl/renderer_opengl.o $(CXXFLAGS)
+
+../framework/model/batch.o: ../framework/model/batch.cpp
+	$(CPP) -c ../framework/model/batch.cpp -o ../framework/model/batch.o $(CXXFLAGS)
+
+../framework/material/texture.o: ../framework/material/texture.cpp
+	$(CPP) -c ../framework/material/texture.cpp -o ../framework/material/texture.o $(CXXFLAGS)
+
+../framework/material/image.o: ../framework/material/image.cpp
+	$(CPP) -c ../framework/material/image.cpp -o ../framework/material/image.o $(CXXFLAGS)
+
+../framework/renderer_opengl/gl_extensions.o: ../framework/renderer_opengl/gl_extensions.cpp
+	$(CPP) -c ../framework/renderer_opengl/gl_extensions.cpp -o ../framework/renderer_opengl/gl_extensions.o $(CXXFLAGS)
+
+../framework/renderer.o: ../framework/renderer.cpp
+	$(CPP) -c ../framework/renderer.cpp -o ../framework/renderer.o $(CXXFLAGS)
+
+../framework/scene/camera.o: ../framework/scene/camera.cpp
+	$(CPP) -c ../framework/scene/camera.cpp -o ../framework/scene/camera.o $(CXXFLAGS)
+
+../framework/math/matrix.o: ../framework/math/matrix.cpp
+	$(CPP) -c ../framework/math/matrix.cpp -o ../framework/math/matrix.o $(CXXFLAGS)
+
+../framework/scene/scene_portal.o: ../framework/scene/scene_portal.cpp
+	$(CPP) -c ../framework/scene/scene_portal.cpp -o ../framework/scene/scene_portal.o $(CXXFLAGS)
+
+../framework/math/geometry.o: ../framework/math/geometry.cpp
+	$(CPP) -c ../framework/math/geometry.cpp -o ../framework/math/geometry.o $(CXXFLAGS)
+
+../framework/physics/collision_set_bsp.o: ../framework/physics/collision_set_bsp.cpp
+	$(CPP) -c ../framework/physics/collision_set_bsp.cpp -o ../framework/physics/collision_set_bsp.o $(CXXFLAGS)
