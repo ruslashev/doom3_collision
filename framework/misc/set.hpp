@@ -22,82 +22,82 @@
 template <class TYPE>
 class Set {
 public:
-	Set() {
-		m_count = m_capasity = 0;
-		m_list = NULL;
-	}
+  Set() {
+    m_count = m_capasity = 0;
+    m_list = NULL;
+  }
 
-    Set(const unsigned int new_capasity) {
-	    m_count = 0;
-		m_capasity = new_capasity;
-		m_list = (TYPE *) malloc(m_capasity * sizeof(TYPE));
-	}
-	
-	~Set() {
-		free(m_list);
-	}
+  Set(const unsigned int new_capasity) {
+    m_count = 0;
+    m_capasity = new_capasity;
+    m_list = (TYPE *) malloc(m_capasity * sizeof(TYPE));
+  }
 
-	TYPE *get_array() const { return m_list; }
-	TYPE &operator [] (const unsigned int index) const { return m_list[index]; }
-	TYPE &get_index(int j) const { return m_list[j]; }
-	
-	unsigned int size() const { return m_count; }
+  ~Set() {
+    free(m_list);
+  }
 
-	void resize(const unsigned int new_count){
-		m_capasity = m_count = new_count;
-		m_list = (TYPE *) realloc(m_list, m_capasity * sizeof(TYPE));		
-	}
+  TYPE *get_array() const { return m_list; }
+  TYPE &operator [] (const unsigned int index) const { return m_list[index]; }
+  TYPE &get_index(int j) const { return m_list[j]; }
 
-	unsigned int add(const TYPE object){
-		if (m_count >= m_capasity){
-			if (m_capasity) {
-       			m_capasity += m_capasity; 
-            } else {
-                m_capasity = 8;
-            }    
-			m_list = (TYPE *) realloc(m_list, m_capasity * sizeof(TYPE));
-		}
-		m_list[m_count] = object;
-		return m_count++;
-	}
+  unsigned int size() const { return m_count; }
 
-	void remove(const unsigned int index){
-		if (index < m_count) {
-			--m_count;
-			m_list[index] = m_list[m_count];
-		}
-	}
+  void resize(const unsigned int new_count){
+    m_capasity = m_count = new_count;
+    m_list = (TYPE *) realloc(m_list, m_capasity * sizeof(TYPE));
+  }
 
-	void ordered_remove(const unsigned int index){
-		if (index < m_count){
-			--m_count;
-			memmove(m_list + index, m_list + index + 1, (m_count - index) * sizeof(TYPE));
-		}
-	}
+  unsigned int add(const TYPE object){
+    if (m_count >= m_capasity){
+      if (m_capasity) {
+        m_capasity += m_capasity;
+      } else {
+        m_capasity = 8;
+      }
+      m_list = (TYPE *) realloc(m_list, m_capasity * sizeof(TYPE));
+    }
+    m_list[m_count] = object;
+    return m_count++;
+  }
 
-	void remove_object(const TYPE object){
-		for (unsigned int i = 0; i < m_count; i++){
-			if (m_object == m_list[i]){
-				remove(i);
-				return;
-			}
-		}
-	}
+  void remove(const unsigned int index){
+    if (index < m_count) {
+      --m_count;
+      m_list[index] = m_list[m_count];
+    }
+  }
 
-	void clear() {
-		m_count = 0;
-	}
+  void ordered_remove(const unsigned int index){
+    if (index < m_count){
+      --m_count;
+      memmove(m_list + index, m_list + index + 1, (m_count - index) * sizeof(TYPE));
+    }
+  }
 
-	void reset() {
-		free(m_list);
-		m_list = NULL;
-		m_count = m_capasity = 0;
-	}
+  void remove_object(const TYPE object){
+    for (unsigned int i = 0; i < m_count; i++){
+      if (m_object == m_list[i]){
+        remove(i);
+        return;
+      }
+    }
+  }
+
+  void clear() {
+    m_count = 0;
+  }
+
+  void reset() {
+    free(m_list);
+    m_list = NULL;
+    m_count = m_capasity = 0;
+  }
 private:
 protected:
-	unsigned int m_capasity;
-	unsigned int m_count;
-	TYPE * m_list;
+  unsigned int m_capasity;
+  unsigned int m_count;
+  TYPE * m_list;
 };
 
 #endif /* _SET_ */

@@ -22,30 +22,30 @@
 //==============================================================================
 class Plane {
 public:
-	// constructors 
-	Plane(void) {}
-	Plane(const Vector3f& n_normal, float n_d ) : normal(n_normal), d(n_d) {}    
-        
-	~Plane() {}	
-	
-	// vector algebra	
-	inline void normalize() {
-	    float inv_length = 1.0f / normal.get_length();
-	    normal *= inv_length;
-	    d *= inv_length;
-	}
-     
-    inline bool is_in_front(const Vector3f & point) {
-        return (point*normal+d > 0);
-    }    
+  // constructors
+  Plane(void) {}
+  Plane(const Vector3f& n_normal, float n_d ) : normal(n_normal), d(n_d) {}
 
-    inline float distance(const Vector3f & point) {
-        return point*normal-d;
-    }
+  ~Plane() {}
 
-	// member variables
-	Vector3f normal;
-	float d;
+  // vector algebra
+  inline void normalize() {
+    float inv_length = 1.0f / normal.get_length();
+    normal *= inv_length;
+    d *= inv_length;
+  }
+
+  inline bool is_in_front(const Vector3f & point) {
+    return (point*normal+d > 0);
+  }
+
+  inline float distance(const Vector3f & point) {
+    return point*normal-d;
+  }
+
+  // member variables
+  Vector3f normal;
+  float d;
 };
 
 #endif	/* _GEOMETRY_ */

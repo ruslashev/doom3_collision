@@ -26,27 +26,27 @@ class Logger;
 //  Logstreambuf
 //==============================================================================
 class Logstreambuf : public std::streambuf {
-    public:
-        Logstreambuf() { m_to_file=true; };
-        void init(Logger* n_logger, int n_level, bool to_file);    
-    protected:
-        virtual int overflow(int c);
-    private:
-        std::string lnbuffer;
-        Logger* m_logger;
-        int m_level;
-        bool m_to_file;
+public:
+  Logstreambuf() { m_to_file=true; };
+  void init(Logger* n_logger, int n_level, bool to_file);
+protected:
+  virtual int overflow(int c);
+private:
+  std::string lnbuffer;
+  Logger* m_logger;
+  int m_level;
+  bool m_to_file;
 };
 
 //==============================================================================
 //  Logstream
 //==============================================================================
 class Logstream : public std::ostream {
-    public:
-        Logstream() : std::ostream(&m_buffer) {};
-        void init(Logger* n_logger, int n_level, bool to_file);       
-    private:
-     	Logstreambuf m_buffer;
+public:
+  Logstream() : std::ostream(&m_buffer) {};
+  void init(Logger* n_logger, int n_level, bool to_file);
+private:
+  Logstreambuf m_buffer;
 };
 
 //==============================================================================
@@ -54,34 +54,34 @@ class Logstream : public std::ostream {
 //==============================================================================
 class Logger {
 public:
-	Logger();
-	~Logger();
+  Logger();
+  ~Logger();
 
-	//Output functions 
-	Logstream function; // -1
-	Logstream success; // 0
- 	Logstream warning; // 1
-	Logstream error; // 2
-  	Logstream debug; // 3
-   	Logstream init; // 4
-   	Logstream realtime; // 5
-   	
-   	// intend functions
-   	void begin_function() { ++m_indent; }
-   	void end_function() { --m_indent; }
-   	
-	void output(bool to_file, int level, char * text, ...); 	
-	/* use console */
-//	void set_console(Overlay_console* n_console);
+  //Output functions
+  Logstream function; // -1
+  Logstream success; // 0
+  Logstream warning; // 1
+  Logstream error; // 2
+  Logstream debug; // 3
+  Logstream init; // 4
+  Logstream realtime; // 5
+
+  // intend functions
+  void begin_function() { ++m_indent; }
+  void end_function() { --m_indent; }
+
+  void output(bool to_file, int level, char * text, ...);
+  /* use console */
+  //	void set_console(Overlay_console* n_console);
 private:
-	FILE* logfile;
-//	Overlay_console* m_console;
-	int m_indent;
+  FILE* logfile;
+  //	Overlay_console* m_console;
+  int m_indent;
 };
 
 /* log functions called once */
 #ifndef log_debug
-#define log_debug logger.debug 
+#define log_debug logger.debug
 #endif
 
 #ifndef log_function
@@ -101,12 +101,12 @@ private:
 #endif
 
 #ifndef log_init
-#define log_init logger.init 
+#define log_init logger.init
 #endif
 
 /* log functions called often */
 #ifndef log_init_multiple
-#define log_init_multiple logger.init 
+#define log_init_multiple logger.init
 #endif
 
 #ifndef log_success_multiple
@@ -114,11 +114,11 @@ private:
 #endif
 
 #ifndef log_debug_multiple
-#define log_debug_multiple logger.debug 
+#define log_debug_multiple logger.debug
 #endif
 
 #ifndef log_function_multiple
-#define log_function_multiple logger.function 
+#define log_function_multiple logger.function
 #endif
 
 #ifndef log_realtime

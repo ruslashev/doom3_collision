@@ -24,9 +24,9 @@
 //==============================================================================
 class Texture_opengl : public Texture {
 public:
-    Texture_opengl(const std::string & name) : Texture(name) {};
-    
-    bool upload_texture();
+  Texture_opengl(const std::string & name) : Texture(name) {};
+
+  bool upload_texture();
 private:
 };
 
@@ -36,13 +36,13 @@ private:
 //==============================================================================
 class Batch_opengl : public Batch {
 public:
-    Batch_opengl();    
-    
-    void render();
-    bool upload_vertexbuffer();
+  Batch_opengl();
+
+  void render();
+  bool upload_vertexbuffer();
 private:
-	unsigned int m_vertexbuffer;
-	unsigned int m_indexbuffer;
+  unsigned int m_vertexbuffer;
+  unsigned int m_indexbuffer;
 };
 
 //==============================================================================
@@ -50,28 +50,28 @@ private:
 //==============================================================================
 class Renderer_opengl : public Renderer {
 public:
-	Renderer_opengl() {}
-	~Renderer_opengl() {}
-	
-	// init
-	void init();
-	void close();
-		
-	// viewport
-	void set_viewport(const int left, const int top, const int width, const int height);
-	void set_renderport(const int left, const int top, const int width, const int height);
-	void set_view(Camera* camera);
-	
-	// batch
-	Batch* create_batch();
-	
-	// texture	
-	Texture* create_texture(const std::string & name);
-	void upload_textures();
-	void bind_texture(Texture* texture);
-	
-	// render batch
-	void render_batch(Batch* batch);
+  Renderer_opengl() {}
+  ~Renderer_opengl() {}
+
+  // init
+  void init();
+  void close();
+
+  // viewport
+  void set_viewport(const int left, const int top, const int width, const int height);
+  void set_renderport(const int left, const int top, const int width, const int height);
+  void set_view(Camera* camera);
+
+  // batch
+  Batch* create_batch();
+
+  // texture
+  Texture* create_texture(const std::string & name);
+  void upload_textures();
+  void bind_texture(Texture* texture);
+
+  // render batch
+  void render_batch(Batch* batch);
 };
 
 #endif /* _RENDERER_OPENGL_ */

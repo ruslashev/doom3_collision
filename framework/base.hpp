@@ -20,68 +20,68 @@
 //==============================================================================
 class Base {
 public:
-	Base();
-	~Base() {};
- 	
-	// init
-	virtual void init()=0;
-	virtual void close()=0;
-	virtual bool update()=0;
- 	
-	// Timer	
-	void update_timer();
-	void reset_timer();
+  Base();
+  ~Base() {};
 
-	inline float get_fps() const { return m_fps; }
-	inline float get_frame_interval() const { return m_frame_interval; }
-	virtual float get_sys_time() const { return 0.0f; }	
-	
-	// Window 
-	virtual void set_caption(const char *title)=0;
-	virtual void swap_buffers(void)=0;
-	virtual void resize_window( const int width, const int height, const bool fullscreen )=0;
-	virtual void init_window( const int width, const int height, const bool fullscreen )=0;
-	
-	int get_window_width(void) const { return m_width; }
-	int get_window_height(void) const { return m_height; }	
-	bool get_fullscreen(void) const { return m_fullscreen; }
-	
-	// Keyboard and Mouse	
-    inline bool is_key_pressed( int key ) { return m_keys[ key ]; }
-    inline bool is_key_released( int key ) { return m_keys_released[ key ]; }
-    
-    inline int get_mouse_x() { return m_mouse_x; }
-    inline int get_mouse_y() { return m_mouse_y; }
-	inline unsigned short int get_mouse_buttons() { return m_mouse_buttons; }
-	
-	virtual void set_mouse_position(int x, int y) {}	
-    virtual void set_mouse_cursor_visibility(bool visibile) {};
-protected:        
-	// Window dimensions
-	int m_width, m_height;
-	bool m_fullscreen;
-		
-	// Timer
-    float m_fps;
-    float m_frame_interval;
-    float m_frame_time;
-    float m_last_time;
-    int m_fps_counter;	
-    
-    // Keyboard and Mouse
-	bool m_keys_last_frame[NUM_KEYS];
-	bool m_keys[NUM_KEYS];
-	bool m_keys_released[NUM_KEYS];
+  // init
+  virtual void init()=0;
+  virtual void close()=0;
+  virtual bool update()=0;
 
-	int m_mouse_x;
-	int	m_mouse_y;
-	
-	unsigned short int m_mouse_buttons;	    
+  // Timer
+  void update_timer();
+  void reset_timer();
+
+  inline float get_fps() const { return m_fps; }
+  inline float get_frame_interval() const { return m_frame_interval; }
+  virtual float get_sys_time() const { return 0.0f; }
+
+  // Window
+  virtual void set_caption(const char *title)=0;
+  virtual void swap_buffers(void)=0;
+  virtual void resize_window( const int width, const int height, const bool fullscreen )=0;
+  virtual void init_window( const int width, const int height, const bool fullscreen )=0;
+
+  int get_window_width(void) const { return m_width; }
+  int get_window_height(void) const { return m_height; }
+  bool get_fullscreen(void) const { return m_fullscreen; }
+
+  // Keyboard and Mouse
+  inline bool is_key_pressed( int key ) { return m_keys[ key ]; }
+  inline bool is_key_released( int key ) { return m_keys_released[ key ]; }
+
+  inline int get_mouse_x() { return m_mouse_x; }
+  inline int get_mouse_y() { return m_mouse_y; }
+  inline unsigned short int get_mouse_buttons() { return m_mouse_buttons; }
+
+  virtual void set_mouse_position(int x, int y) {}
+  virtual void set_mouse_cursor_visibility(bool visibile) {};
+protected:
+  // Window dimensions
+  int m_width, m_height;
+  bool m_fullscreen;
+
+  // Timer
+  float m_fps;
+  float m_frame_interval;
+  float m_frame_time;
+  float m_last_time;
+  int m_fps_counter;
+
+  // Keyboard and Mouse
+  bool m_keys_last_frame[NUM_KEYS];
+  bool m_keys[NUM_KEYS];
+  bool m_keys_released[NUM_KEYS];
+
+  int m_mouse_x;
+  int	m_mouse_y;
+
+  unsigned short int m_mouse_buttons;
 private:
 };
 
 //==============================================================================
-//  Keyboard Layout 
+//  Keyboard Layout
 // 	todo: make this base specific, Base_SDL values declared now...
 //==============================================================================
 const int KEY_UNKNOWN      = 0;
@@ -146,7 +146,7 @@ const int KEY_X			   = 120;
 const int KEY_Y			   = 121;
 const int KEY_Z			   = 122;
 const int KEY_DEL		   = 127;
-	/* Numeric keypad */
+/* Numeric keypad */
 const int KEY_KP0		   = 256;
 const int KEY_KP1		   = 257;
 const int KEY_KP2	       = 258;
@@ -164,7 +164,7 @@ const int KEY_KP_MINUS	   = 269;
 const int KEY_KP_PLUS	   = 270;
 const int KEY_KP_ENTER	   = 271;
 const int KEY_KP_EQUALS	   = 272;
-	/* Arrows + Home/End pad */
+/* Arrows + Home/End pad */
 const int KEY_UP		   = 273;
 const int KEY_DOWN		   = 274;
 const int KEY_RIGHT		   = 275;
@@ -174,7 +174,7 @@ const int KEY_HOME		   = 278;
 const int KEY_END		   = 279;
 const int KEY_PAGEUP	   = 280;
 const int KEY_PAGEDOWN	   = 281;
-	/* Function keys */
+/* Function keys */
 const int KEY_F1		   = 282;
 const int KEY_F2		   = 283;
 const int KEY_F3		   = 284;
@@ -190,7 +190,7 @@ const int KEY_F12		   = 293;
 const int KEY_F13		   = 294;
 const int KEY_F14		   = 295;
 const int KEY_F15		   = 296;
-	/* Key state modifier keys */
+/* Key state modifier keys */
 const int KEY_NUMLOCK	   = 300;
 const int KEY_CAPSLOCK	   = 301;
 const int KEY_SCROLLOCK	   = 302;
@@ -202,10 +202,10 @@ const int KEY_RALT		   = 307;
 const int KEY_LALT		   = 308;
 const int KEY_RMETA		   = 309;
 const int KEY_LMETA		   = 310;
-const int KEY_LSUPER	   = 311;		
-const int KEY_RSUPER	   = 312;		
-const int KEY_MODE		   = 313;		
-const int KEY_COMPOSE	   = 314;		
+const int KEY_LSUPER	   = 311;
+const int KEY_RSUPER	   = 312;
+const int KEY_MODE		   = 313;
+const int KEY_COMPOSE	   = 314;
 
 extern Base* base;
 

@@ -27,20 +27,20 @@ class Collision_brush;
 //==============================================================================
 class Kd_tree_node {
 public:
-	Kd_tree_node() {}
+  Kd_tree_node() {}
 
-	void read_from_file(std::ifstream &file);
-	void insert_brush(Collision_brush* brush);
-	
-    void trace(const Vector3f & start, Vector3f & end, float radius);
-    void render_debug(Vector3f min, Vector3f max);
+  void read_from_file(std::ifstream &file);
+  void insert_brush(Collision_brush* brush);
+
+  void trace(const Vector3f & start, Vector3f & end, float radius);
+  void render_debug(Vector3f min, Vector3f max);
 public:
-	Kd_tree_node* child_front;
- 	Kd_tree_node* child_back;
-    Set<Collision_brush *> m_brushes;
+  Kd_tree_node* child_front;
+  Kd_tree_node* child_back;
+  Set<Collision_brush *> m_brushes;
 
-	int index; // -1 = no childs, 0 = yz plane, 1 = xz plane, 2 = xy plane
-	float distance;
+  int index; // -1 = no childs, 0 = yz plane, 1 = xz plane, 2 = xy plane
+  float distance;
 };
 
 //==============================================================================
@@ -48,34 +48,34 @@ public:
 //==============================================================================
 class Collision_brush {
 public:
-	Collision_brush() {}
+  Collision_brush() {}
 
-	bool read_from_file(std::ifstream &file);
-	void trace(const Vector3f & start, const Vector3f & end, float radius, Vector3f & output);
-	
-    Vector3f m_min, m_max;	// bounding box    
+  bool read_from_file(std::ifstream &file);
+  void trace(const Vector3f & start, const Vector3f & end, float radius, Vector3f & output);
+
+  Vector3f m_min, m_max;	// bounding box
 private:
-    Set<Plane> m_planes;
-    std::string m_solid;
+  Set<Plane> m_planes;
+  std::string m_solid;
 };
-   
+
 //==============================================================================
 //  Collision_set_bsp
 //==============================================================================
 class Collision_set_bsp {
-public:    
-    Collision_set_bsp() : m_kd_tree(NULL) {}
-    
-    void trace(const Vector3f & start, Vector3f & end, float radius);
-    
-    void render_brushes();
-    void render_tree();
-        
-    void load_cm(const std::string & name);
-private:    
-    Set<Vector3f> m_vertices;    
-    Set<Collision_brush *> m_brushes;
-    Kd_tree_node* m_kd_tree;
+public:
+  Collision_set_bsp() : m_kd_tree(NULL) {}
+
+  void trace(const Vector3f & start, Vector3f & end, float radius);
+
+  void render_brushes();
+  void render_tree();
+
+  void load_cm(const std::string & name);
+private:
+  Set<Vector3f> m_vertices;
+  Set<Collision_brush *> m_brushes;
+  Kd_tree_node* m_kd_tree;
 };
 
 //==============================================================================

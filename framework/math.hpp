@@ -13,7 +13,7 @@
 #ifndef _MATH_
 #define _MATH_ 1
 
-#include <math.h> 
+#include <math.h>
 #include <stdlib.h>
 
 #define PI 3.1415926535897932384626433832795f
@@ -25,7 +25,7 @@ inline float deg_to_rad(float deg) {return (float) (deg * PI_DIV_180);}
 inline float rad_to_deg(float rad) {return (float) (rad * _180_DIV_PI);}
 
 inline float ranged_random(float v1,float v2) {
-	return v1 + (v2-v1)*((float)rand())/((float)RAND_MAX);
+  return v1 + (v2-v1)*((float)rand())/((float)RAND_MAX);
 }
 inline bool is_finite(float val) {
   return ((val < 1e8) && (val > -1e8));
@@ -34,16 +34,16 @@ inline bool is_finite(float val) {
 //This code is purported to be from Quake3 and provides an approximation
 //to the inverse square root of a number, 1/sqrtf(x).
 inline float fast_inv_sqrt(float x) {
-    float xhalf = 0.5f*x;
-    long i = *(long*) &x;		
-//    i = 0x5f3759df - (i>>1);	// original
-//    i = 0x5f375a86 - (i>>1);  // better?
-    i = 0x5F400000 - (i>>1);  // Nick (flipcode)?
-    x = *(float*) &i;			
-    x = x*(1.5f-xhalf*x*x);		// Newton step, repeating increases accuracy
-//    x = x*(1.5f-xhalf*x*x);		// Newton step, repeating increases accuracy
- 
-    return x;  
+  float xhalf = 0.5f*x;
+  long i = *(long*) &x;
+  //    i = 0x5f3759df - (i>>1);	// original
+  //    i = 0x5f375a86 - (i>>1);  // better?
+  i = 0x5F400000 - (i>>1);  // Nick (flipcode)?
+  x = *(float*) &i;
+  x = x*(1.5f-xhalf*x*x);		// Newton step, repeating increases accuracy
+  //    x = x*(1.5f-xhalf*x*x);		// Newton step, repeating increases accuracy
+
+  return x;
 }
 
 #define roundf(x) floorf((x) + 0.5f)
