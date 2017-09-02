@@ -77,7 +77,7 @@ public:
 
   void remove_object(const TYPE object){
     for (unsigned int i = 0; i < m_count; i++){
-      if (m_object == m_list[i]){
+      if (object == m_list[i]){
         remove(i);
         return;
       }

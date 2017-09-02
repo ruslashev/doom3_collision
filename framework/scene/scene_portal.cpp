@@ -283,7 +283,8 @@ inline std::string proc_get_next_value(std::ifstream & file) {
       return s;
     }
   }
-  return false;
+  puts("HALT AND CATCH FIRE");
+  exit(666);
 }
 
 inline std::string proc_get_next_string(std::ifstream & file) {

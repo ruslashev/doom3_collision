@@ -12,6 +12,7 @@
 
 #include "log.hpp"
 #include "../math/vector.hpp"
+#include <cstdarg>
 //#include "../gui.hpp"
 
 #define MAX_LENGTH 256

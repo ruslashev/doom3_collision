@@ -96,7 +96,7 @@ public:
   Matrix3x3f operator+(void) const {return (*this);}
 
   //multiply a vector by this matrix
-  inline Vector3f Matrix3x3f::operator*(const Vector3f rhs) const {
+  inline Vector3f operator*(const Vector3f rhs) const {
     return Vector3f(m_data[0]*rhs.x + m_data[3]*rhs.y + m_data[6]*rhs.z,
         m_data[1]*rhs.x + m_data[4]*rhs.y + m_data[7]*rhs.z,
         m_data[2]*rhs.x + m_data[5]*rhs.y + m_data[8]*rhs.z);
@@ -122,7 +122,7 @@ public:
   const float & operator()(const int i, const int j) const {return m_data[i + 3*j];}
 
   // inline void orthonormalise();
-  inline void Matrix3x3f::orthonormalize() {
+  inline void orthonormalize() {
     Vector3f u1(operator()(0, 0), operator()(1, 0), operator()(2, 0));
     Vector3f u2(operator()(0, 1), operator()(1, 1), operator()(2, 1));
     Vector3f u3(operator()(0, 2), operator()(1, 2), operator()(2, 2));
@@ -280,7 +280,7 @@ public:
   Matrix4x4f operator+(void) const {return (*this);}
 
   //multiply a vector by this matrix
-  inline Vector4f Matrix4x4f::operator*(const Vector4f rhs) const {
+  inline Vector4f operator*(const Vector4f rhs) const {
     return Vector4f(m_data[ 0]*rhs.x + m_data[ 4]*rhs.y + m_data[ 8]*rhs.z + m_data[12]*rhs.w,
         m_data[ 1]*rhs.x + m_data[ 5]*rhs.y + m_data[ 9]*rhs.z + m_data[13]*rhs.w,
         m_data[ 2]*rhs.x + m_data[ 6]*rhs.y + m_data[10]*rhs.z + m_data[14]*rhs.w,

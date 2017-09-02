@@ -16,6 +16,8 @@
 #include "../material/image.hpp"
 #include "../scene/camera.hpp"
 
+#define GLEW_STATIC
+#include <GL/glew.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
 
@@ -55,18 +57,16 @@ Batch_opengl::Batch_opengl() {
 //  Batch_opengl::upload_vertexbuffer()
 //==============================================================================
 bool Batch_opengl::upload_vertexbuffer() {
-  if (GL_ARB_vertex_buffer_object_supported) {
-    glGenBuffersARB(1, &m_vertexbuffer);
-    glBindBufferARB(GL_ARRAY_BUFFER_ARB, m_vertexbuffer);
-    glBufferDataARB(GL_ARRAY_BUFFER_ARB, m_num_vertices * m_vertex_size, m_vertices, GL_STATIC_DRAW_ARB);
+  glGenBuffersARB(1, &m_vertexbuffer);
+  glBindBufferARB(GL_ARRAY_BUFFER_ARB, m_vertexbuffer);
+  glBufferDataARB(GL_ARRAY_BUFFER_ARB, m_num_vertices * m_vertex_size, m_vertices, GL_STATIC_DRAW_ARB);
 
-    glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
-    if (m_indices > 0) {
-      glGenBuffersARB(1, &m_indexbuffer);
-      glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, m_indexbuffer);
-      glBufferDataARB(GL_ELEMENT_ARRAY_BUFFER_ARB, m_num_indices * m_index_size, m_indices, GL_STATIC_DRAW_ARB);
-      glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, 0);
-    }
+  glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
+  if (m_indices > 0) {
+    glGenBuffersARB(1, &m_indexbuffer);
+    glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, m_indexbuffer);
+    glBufferDataARB(GL_ELEMENT_ARRAY_BUFFER_ARB, m_num_indices * m_index_size, m_indices, GL_STATIC_DRAW_ARB);
+    glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, 0);
   }
 
   return true;
@@ -78,11 +78,11 @@ bool Batch_opengl::upload_vertexbuffer() {
 void Batch_opengl::render() {
   unsigned int i, num_formats = m_formats.size();
 
-  if(!m_vertexbuffer && GL_ARB_vertex_buffer_object_supported){
+  if(!m_vertexbuffer){
     upload_vertexbuffer();
   }
 
-  if (GL_ARB_vertex_buffer_object_supported && m_vertexbuffer != 0) {
+  if (m_vertexbuffer != 0) {
     glBindBufferARB(GL_ARRAY_BUFFER_ARB, m_vertexbuffer);
   }
 
@@ -127,7 +127,7 @@ void Batch_opengl::render() {
     glDisableClientState(arrayType[get_format(i).att_type]);
   }
 
-  if (GL_ARB_vertex_buffer_object_supported && m_vertexbuffer) {
+  if (m_vertexbuffer) {
     glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
   }
 }
@@ -183,17 +183,17 @@ bool Texture_opengl::upload_texture() {
     case TEX_2D:   dimension = GL_TEXTURE_2D;
                    log_debug_multiple << "type = GL_TEXTURE_2D" << endl;
                    break;
-                   //	    case TEX_3D:   dimension = GL_TEXTURE_3D;
-                   //	                   log_debug_multiple << "type = GL_TEXTURE_3D" << endl;
-                   //	                   break;
-    case TEX_CUBE: if(!GL_ARB_texture_cube_map_supported) {
-      log_warning << "GL_TEXTURE_CUBE_MAP is not supported!" << endl;
-      dimension = GL_TEXTURE_2D;
-    } else {
-      dimension = GL_TEXTURE_CUBE_MAP_ARB;
-      log_debug_multiple << "type = GL_TEXTURE_CUBE_MAP_ARB" << endl;
-    }
-                   break;
+    // case TEX_3D:   dimension = GL_TEXTURE_3D;
+    //                log_debug_multiple << "type = GL_TEXTURE_3D" << endl;
+    //                break;
+    // case TEX_CUBE: if(!GL_ARB_texture_cube_map_supported) {
+    //   log_warning << "GL_TEXTURE_CUBE_MAP is not supported!" << endl;
+    //   dimension = GL_TEXTURE_2D;
+    // } else {
+    //   dimension = GL_TEXTURE_CUBE_MAP_ARB;
+    //   log_debug_multiple << "type = GL_TEXTURE_CUBE_MAP_ARB" << endl;
+    // }
+    //                break;
   }
 
   glBindTexture( dimension, m_tex_id);
@@ -255,11 +255,11 @@ bool Texture_opengl::upload_texture() {
     }
   }
 
-  if (GL_EXT_texture_filter_anisotropic_supported){
-    int max_anisotrophy = 1;
-    glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &max_anisotrophy);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, max_anisotrophy);
-  }
+  // if (GL_EXT_texture_filter_anisotropic_supported){
+  //   int max_anisotrophy = 1;
+  //   glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &max_anisotrophy);
+  //   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, max_anisotrophy);
+  // }
 
   if(created) {
     log_debug_multiple << "width " << m_images[0]->get_image_width() << ", height " << m_images[0]->get_image_height() << " bind to " << m_tex_id << endl;
@@ -277,7 +277,9 @@ bool Texture_opengl::upload_texture() {
 //  Renderer_opengl::init()
 //==============================================================================
 void Renderer_opengl::init() {
-  initExtensions();
+  GLenum err = glewInit();
+  if (err != GLEW_OK)
+    printf("failed to initialze glew: %s", glewGetErrorString(err));
 
   glClearColor( 0, 0, 0, 1);
 
