@@ -42,7 +42,7 @@ void Base::update_timer() {
     m_last_time = current_time;
     m_fps = m_fps_counter;
     m_fps_counter=0;
-    log_realtime << m_fps << endl;
+    // log_realtime << m_fps << endl;
   }
 }
 

@@ -56,33 +56,6 @@ void Base_SDL::init_window( const int width, const int height, const bool fullsc
     exit(0);
   }
 
-  Uint32 full = m_fullscreen ? SDL_FULLSCREEN : 0;
-
-  /* initialize the display */
-  switch (m_VideoInfo->vfmt->BitsPerPixel) {
-    case 8:
-      rgb_size[0] = 3;
-      rgb_size[1] = 3;
-      rgb_size[2] = 2;
-      break;
-    case 15:
-    case 16:
-      rgb_size[0] = 5;
-      rgb_size[1] = 5;
-      rgb_size[2] = 5;
-      break;
-    default:
-      rgb_size[0] = 8;
-      rgb_size[1] = 8;
-      rgb_size[2] = 8;
-      break;
-  }
-  SDL_GL_SetAttribute( SDL_GL_RED_SIZE, rgb_size[0] );
-  SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE, rgb_size[1] );
-  SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE, rgb_size[2] );
-  SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE, m_VideoInfo->vfmt->BitsPerPixel );
-  SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
-
   /*	if ( fsaa ) {
       SDL_GL_SetAttribute( SDL_GL_MULTISAMPLEBUFFERS, 1 );
       SDL_GL_SetAttribute( SDL_GL_MULTISAMPLESAMPLES, fsaa );
